@@ -6,3 +6,4 @@ Entender el código y saber como hacerlo.
 Flexibilidad para reuniones sobre el proyecto.
 Compromiso.
 
+teste 
