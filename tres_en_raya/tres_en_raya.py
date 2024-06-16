@@ -39,7 +39,8 @@ def rellena_casilla(casilla, quien_juega):
             tablero_lleno = tablero_lleno[:indice] + " " + tablero_lleno[indice+1:]
             print()
             os.system("clear")
-            print(tablero_vacio)
+            print("\n\n")
+            print(tablero_vacio, "\n")
 
 
 def ganar():
@@ -59,6 +60,7 @@ def ganar():
         return True
     elif (tablero_vacio[9] == tablero_vacio[28] == tablero_vacio[47]) and tablero_vacio[9] != " ":
         return True
+        
 
 def eleccion_maquina():
     pass
@@ -76,11 +78,11 @@ while True:
 
     if quien_juega == "J":
         quien_juega = "x"
-        print("\nDime en qué casilla quieres hacer tu jugada? Elige uno de los números que ves en el tablero:\n")
+        print("\n\tEres la 'x'. Dime en qué casilla quieres hacer tu jugada?\n\n\tElige uno de los números que ves en el tablero:\n\n")
         print(tablero_lleno)
        
         while True:
-            jugada_jugador = int(input("\nCasilla: "))
+            jugada_jugador = int(input("\n\nCasilla: "))
             
             if jugada_jugador in jugadas_permitidas:
                 jugadas_permitidas.remove(jugada_jugador)
@@ -96,6 +98,9 @@ while True:
         if ganar() == True:
             print(f"\n\n!Enhorabuena! Has ganado 🥳\n\n")
             break
+        elif len(jugadas_permitidas) == 0:
+            print(f"\n\nNadie ha ganado este juego, ha sido empate, inténtalo otra vez.\n\n")
+            break
 
     elif quien_juega == "M":
         quien_juega = "o"
@@ -105,11 +110,14 @@ while True:
         if ganar() == True:
             print("\n\nLa máquina ha ganado 🤖 Inténtalo de nuevo!\n\n")
             break
-        print("\nLa máquina hizo su jugada, ahora es tu turno.")
+        elif len(jugadas_permitidas) == 0:
+            print(f"\n\nNadie ha ganado este juego, ha sido empate, inténtalo otra vez.\n\n")
+            break
+        print("\nLa máquina es la 'o' e hizo su jugada, ahora es tu turno.")
     
     else:
         print("Opción no válida 👎 inténtalo de nuevo.")
         break
 
 
-# Falta contemplar el empate e implementar la función que deje la máquina mas competitiva.
+# Falta implementar la función que deje la máquina mas competitiva: In progress.

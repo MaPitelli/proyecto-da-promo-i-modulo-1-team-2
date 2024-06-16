@@ -75,9 +75,9 @@ while True:
     else:
         print("Opción no válida, intenta otra vez.")
 
-    if aciertos == 3:
+    if aciertos == 4:
         print("¡Enhorabuena! Ganaste el juego.")
         break
-    elif errores == 3:
+    elif errores == 4:
         print("Ooohhhh qué pena, perdiste. ¡No te rindas! Inténtalo de nuevo!")
         break
