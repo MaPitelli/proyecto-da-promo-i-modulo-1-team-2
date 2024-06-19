@@ -116,7 +116,7 @@ while True:
                 jugadas_permitidas.remove(jugada_jugador)
                 break
             
-            else:
+            else:                
                 print("\nJugada no permitida ❌ debes elegir el número correspondiente a una casilla que esté vacía.\n")
                 print(tablero_lleno)
                 print()

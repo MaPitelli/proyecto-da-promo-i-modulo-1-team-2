@@ -1,6 +1,7 @@
 import random
 import os
 
+os.system("clear")
 palabras_ahorcado = [
     "python", "programacion", "desarrollo", "algoritmo", "computadora",
     "tecnologia", "internet", "software", "hardware", "inteligencia",
