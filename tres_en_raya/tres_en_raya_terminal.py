@@ -76,11 +76,17 @@ def eleccion_maquina(jugadas_permitidas, tablero_vacio):
     # Prioridad 2: Verificar si el jugador puede ganar en la siguiente jugada y bloquearlo
     for pos in posiciones_ganadoras:
         if tablero_vacio[pos[0]] == tablero_vacio[pos[1]] == "x" and tablero_vacio[pos[2]] == " ":
-            return (indices.index(i)+1 for i in indices if pos[2] == i)
+            for i in indices:
+                if pos[2] == i:
+                    return indices.index(i)+1
         if tablero_vacio[pos[0]] == tablero_vacio[pos[2]] == "x" and tablero_vacio[pos[1]] == " ":
-            return (indices.index(i)+1 for i in indices if pos[1] == i)
+            for i in indices:
+                if pos[1] == i:
+                    return indices.index(i)+1
         if tablero_vacio[pos[1]] == tablero_vacio[pos[2]] == "x" and tablero_vacio[pos[0]] == " ":
-            return (indices.index(i)+1 for i in indices if pos[0] == i)
+            for i in indices:
+                if pos[0] == i:
+                    return indices.index(i)+1
 
     # Prioridad 3: Hacer una jugada aleatoria en una casilla libre
     return random.choice(jugadas_permitidas)
