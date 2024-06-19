@@ -7,13 +7,13 @@ from tarea3 import tarea3 as t3
 from tarea4 import tarea4 as t4
 from tarea5 import tarea5 as t5
 
-os.system('clear')
+os.system('clear') 
 print("\n\n\t\t\t\t*** TRIVIA ESPAÑA ***")
 print("----" *30,"\n")
 print("Reglas del juego: Si tiene 3 aciertos ganas y si tienes 3 fallos pierdes.\n\n")
 print("----" *30,"\n")
 
-numero_total_intentos = 0 
+numero_total_intentos = 3 
 aciertos = 0
 errores = 0
 
@@ -25,26 +25,33 @@ print('''Elige una tarea:
                       4 - CULTURA E HISTORIA DE ESPAÑA
                       5 - SOCIEDAD ESPAÑOLA''')
 
-while True:
-    
-    tarea = input("\n\nINGRESA TU OPCIÓN DEL 1 AL 5 o 'q' para salir: ").lower()
+primera_vez = 's' #variable para controlar que las opciones no se pidan mas de una vez
 
-    if tarea == "1":
-        preguntas_respuestas = t1
-    elif tarea == "2":
-        preguntas_respuestas = t2
-    elif tarea == "3":
-        preguntas_respuestas = t3
-    elif tarea == "4":
-        preguntas_respuestas = t4
-    elif tarea == "5":
-        preguntas_respuestas = t5
-    elif tarea == "q":
-        print("\n\n¿Pero tan pronto? ¡Hasta luego!\n\n")
-        break
-    else:
-        print("\nOpción no valida, vuelve a intentarlo.")
-        break
+while True:
+
+    if primera_vez == 's': #evalua la condicion para que no se repita mas de una vez
+    
+        tarea = input("\n\nINGRESA TU OPCIÓN DEL 1 AL 5 o 'q' para salir: ").lower()
+        
+        if tarea == "1":
+            preguntas_respuestas = t1
+        elif tarea == "2":
+            preguntas_respuestas = t2
+        elif tarea == "3":
+            preguntas_respuestas = t3
+        elif tarea == "4":
+            preguntas_respuestas = t4
+        elif tarea == "5":
+            preguntas_respuestas = t5
+        elif tarea == "q":
+            print("\n\n¿Pero tan pronto? ¡Hasta luego!\n\n")
+            break
+        else:
+            print("\nOpción no valida, vuelve a intentarlo.")
+            break  
+        
+        primera_vez = 'n' ##variable para controlar que las opciones no se pidan mas de una vez
+        os.system('clear')# clear para borrar lo de arriba
 
     pregunta = (random.choice(list(preguntas_respuestas.keys())))
     print("\n\n",pregunta)
@@ -79,7 +86,7 @@ while True:
 
     if aciertos == 3:
         print("¡Enhorabuena! Ganaste el juego.")
-        break
+        break 
     elif errores == 3:
         print("Ooohhhh qué pena, perdiste. ¡No te rindas! Inténtalo de nuevo!")
         break
