@@ -7,6 +7,7 @@ from tarea3 import tarea3 as t3
 from tarea4 import tarea4 as t4
 from tarea5 import tarea5 as t5
 
+os.system("clear")
 print("*** PREGUNTAS DEL EXAMEN PARA LA NACIONALIDAD ESPAÑOLA ***")
 print("----" *30,"\n")
 
