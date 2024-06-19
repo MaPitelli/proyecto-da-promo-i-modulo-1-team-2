@@ -16,9 +16,8 @@ class TicTacToe:
 ---+---+---
  7 | 8 | 9 '''
         
-
-        self.jugadas_permitidas = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-        self.indices = [1, 5, 9, 24, 28, 32, 47, 51, 55]
+        self.jugadas_permitidas = [1, 2, 3, 4, 5, 6, 7, 8, 9] # Lista de jugadas permitidas
+        self.indices = [1, 5, 9, 24, 28, 32, 47, 51, 55] # Índices correspondientes a las posiciones en el string del tablero
         self.posiciones_ganadoras = [
             (1, 5, 9), (24, 28, 32), (47, 51, 55),  # Filas
             (1, 24, 47), (5, 28, 51), (9, 32, 55),  # Columnas
@@ -26,7 +25,8 @@ class TicTacToe:
         self.quien_juega = None
 
 
-    def display_welcome(self):
+    def mensaje_bienvenida(self):
+        """Muestra el mensaje de bienvenida y las opciones para elegir quién comienza"""
         os.system("clear")
         print("\n*** BIENVENIDO AL 3 EN RAYA ***\n\n")
         print("Quién empieza a jugar?\n")
@@ -38,6 +38,7 @@ class TicTacToe:
 
 
     def elegir_quien_empieza(self):
+        """Permite al usuario elegir quién comienza el juego o seleccionar aleatoriamente"""
         while True:
             self.quien_juega = input("Elección: ").upper()
             os.system('clear')
@@ -52,6 +53,7 @@ class TicTacToe:
 
 
     def rellena_casilla(self, casilla, quien_juega):
+        """Rellena una casilla del tablero con el símbolo del jugador actual"""
         for i in range(1, 10):
             if casilla == i:
                 indice = self.indices[i-1]
@@ -64,6 +66,7 @@ class TicTacToe:
 
 
     def ganar(self):
+        """Verifica si hay una combinación ganadora en el tablero"""
         for pos in self.posiciones_ganadoras:
             if self.tablero_vacio[pos[0]] == self.tablero_vacio[pos[1]] == self.tablero_vacio[pos[2]] != " ":
                 return True
@@ -71,6 +74,7 @@ class TicTacToe:
 
 
     def eleccion_maquina(self):
+        """Determina la jugada de la máquina con prioridad en ganar o bloquear al jugador"""
         # Prioridad 1: Verificar si la máquina puede ganar en la siguiente jugada
         for pos in self.posiciones_ganadoras:
             if self.tablero_vacio[pos[0]] == self.tablero_vacio[pos[1]] == "o" and self.tablero_vacio[pos[2]] == " ":
@@ -93,8 +97,8 @@ class TicTacToe:
         return random.choice(self.jugadas_permitidas)
 
 
-
     def jugar(self):
+        """Controla el flujo del juego alternando entre el jugador y la máquina"""
         while True:
             if self.quien_juega == "x":
                 self.quien_juega = "M"
@@ -142,10 +146,9 @@ class TicTacToe:
                 print("\nLa máquina es la 'o' e hizo su jugada, ahora es tu turno.")
 
 
-# Main execution
+# Ejecución principal
 if __name__ == "__main__":
     juego = TicTacToe()
-    juego.display_welcome()
+    juego.mensaje_bienvenida()
     juego.elegir_quien_empieza()
     juego.jugar()
-
