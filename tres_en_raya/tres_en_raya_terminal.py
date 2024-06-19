@@ -3,7 +3,7 @@ import os
 
 os.system("clear")
 print("\n*** BIENVENIDO AL 3 EN RAYA ***\n\n")
-print("Primero lo primero: quién empieza a jugar?\n")
+print("Quién empieza a jugar?\n")
 print('''Elige:
         M - Máquina 🤖 o
         J - Jugador 🙋 x
@@ -23,9 +23,14 @@ tablero_lleno = ''' 1 | 2 | 3
 ---+---+---
  7 | 8 | 9 '''
 
-jugadas_permitidas = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 
+jugadas_permitidas = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 indices = [1, 5, 9, 24, 28, 32, 47, 51, 55]
+posiciones_ganadoras = [
+        (1, 5, 9), (24, 28, 32), (47, 51, 55), # Filas
+        (1, 24, 47), (5, 28, 51), (9, 32, 55), # Columnas
+        (1, 28, 55), (9, 28, 47)               # Diagonales
+    ]
 
 
 def rellena_casilla(casilla, quien_juega):
@@ -42,43 +47,43 @@ def rellena_casilla(casilla, quien_juega):
 
 
 def ganar(tablero_vacio):
-    combinaciones_ganadoras = [[1, 5, 9], [24, 28, 32], [47, 51, 55], [1, 24, 47], [5, 28, 51], [9, 32, 55], [1, 28, 55], [9, 28, 47]]
-    for combinacion in combinaciones_ganadoras:
-        if tablero_vacio[combinacion[0]] == tablero_vacio[combinacion[1]] == tablero_vacio[combinacion[2]] != " ":
+    global posiciones_ganadoras
+    for pos in posiciones_ganadoras:
+        if tablero_vacio[pos[0]] == tablero_vacio[pos[1]] == tablero_vacio[pos[2]] != " ":
             return True
     return False
 
         
 
-# def eleccion_maquina(jugadas_permitidas, tablero_vacio):
-#     posiciones_ganadoras = [
-#         (1, 5, 9), (24, 28, 32), (47, 51, 55), # Filas
-#         (1, 24, 47), (5, 28, 51), (9, 32, 55), # Columnas
-#         (1, 28, 55), (9, 28, 47)               # Diagonales
-#     ]
+def eleccion_maquina(jugadas_permitidas, tablero_vacio):
+    global posiciones_ganadoras
 
-#     # Prioridad 1: Verificar si la máquina puede ganar en la siguiente jugada
-#     for pos in posiciones_ganadoras:
-#         if tablero_vacio[pos[0]] == tablero_vacio[pos[1]] == "o" and tablero_vacio[pos[2]] == " ":
-#             pass
-#         if tablero_vacio[pos[0]] == tablero_vacio[pos[2]] == "o" and tablero_vacio[pos[1]] == " ":
-#             pass
-#         if tablero_vacio[pos[1]] == tablero_vacio[pos[2]] == "o" and tablero_vacio[pos[0]] == " ":
-#             pass
+    # Prioridad 1: Verificar si la máquina puede ganar en la siguiente jugada
+    for pos in posiciones_ganadoras:
+        if tablero_vacio[pos[0]] == tablero_vacio[pos[1]] == "o" and tablero_vacio[pos[2]] == " ":
+            for i in indices:
+                if pos[2] == i:
+                    return indices.index(i)+1
+        if tablero_vacio[pos[0]] == tablero_vacio[pos[2]] == "o" and tablero_vacio[pos[1]] == " ":
+            for i in indices:
+                if pos[1] == i:
+                    return indices.index(i)+1
+        if tablero_vacio[pos[1]] == tablero_vacio[pos[2]] == "o" and tablero_vacio[pos[0]] == " ":
+            for i in indices:
+                if pos[0] == i:
+                    return indices.index(i)+1
+                
+    # Prioridad 2: Verificar si el jugador puede ganar en la siguiente jugada y bloquearlo
+    for pos in posiciones_ganadoras:
+        if tablero_vacio[pos[0]] == tablero_vacio[pos[1]] == "x" and tablero_vacio[pos[2]] == " ":
+            return (indices.index(i)+1 for i in indices if pos[2] == i)
+        if tablero_vacio[pos[0]] == tablero_vacio[pos[2]] == "x" and tablero_vacio[pos[1]] == " ":
+            return (indices.index(i)+1 for i in indices if pos[1] == i)
+        if tablero_vacio[pos[1]] == tablero_vacio[pos[2]] == "x" and tablero_vacio[pos[0]] == " ":
+            return (indices.index(i)+1 for i in indices if pos[0] == i)
 
-#     # Prioridad 2: Verificar si el jugador puede ganar en la siguiente jugada y bloquearlo
-#     for pos in posiciones_ganadoras:
-#         if tablero_vacio[pos[0]] == tablero_vacio[pos[1]] == "x" and tablero_vacio[pos[2]] == " ":
-#             pass
-#         if tablero_vacio[pos[0]] == tablero_vacio[pos[2]] == "x" and tablero_vacio[pos[1]] == " ":
-#             pass
-#         if tablero_vacio[pos[1]] == tablero_vacio[pos[2]] == "x" and tablero_vacio[pos[0]] == " ":
-#             pass
-
-#     # Prioridad 3: Hacer una jugada aleatoria en una casilla libre
-#     return random.choice(jugadas_permitidas)
-
-# # Reemplazar la llamada a random.choice por la función eleccion_maquina
+    # Prioridad 3: Hacer una jugada aleatoria en una casilla libre
+    return random.choice(jugadas_permitidas)
 
 
 
@@ -132,7 +137,9 @@ while True:
 
     elif quien_juega == "M":
         quien_juega = "o"
-        jugada_maquina = int(random.choice(jugadas_permitidas))
+        jugada_maquina = eleccion_maquina(jugadas_permitidas, tablero_vacio)
+        print(jugada_maquina)
+        print(type(jugada_maquina))
         jugadas_permitidas.remove(jugada_maquina)
         rellena_casilla(jugada_maquina, quien_juega)
         if ganar(tablero_vacio) == True:
