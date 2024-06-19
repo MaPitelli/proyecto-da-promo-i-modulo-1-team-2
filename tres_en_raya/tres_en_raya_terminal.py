@@ -10,8 +10,6 @@ print('''Elige:
         S - No quiero elegir, que se haga un sorteo entre Máquina y Jugador 🤷
         ''')
 
-quien_juega = input("Elección: ").upper()
-
 
 tablero_vacio = '''   |   |  
 ---+---+---
@@ -43,32 +41,61 @@ def rellena_casilla(casilla, quien_juega):
             print(tablero_vacio, "\n")
 
 
-def ganar():
-    if (tablero_vacio[1] == tablero_vacio[5] == tablero_vacio[9]) and tablero_vacio[1] != " ":
-        return True
-    elif (tablero_vacio[24] == tablero_vacio[28] == tablero_vacio[32]) and tablero_vacio[24] != " ": 
-        return True
-    elif (tablero_vacio[47] == tablero_vacio[51] == tablero_vacio[55]) and tablero_vacio[47] != " ":
-        return True
-    elif (tablero_vacio[1] == tablero_vacio[24] == tablero_vacio[47]) and tablero_vacio[1] != " ":
-        return True
-    elif (tablero_vacio[5] == tablero_vacio[28] == tablero_vacio[51]) and tablero_vacio[5] != " ":
-        return True
-    elif (tablero_vacio[9] == tablero_vacio[32] == tablero_vacio[55]) and tablero_vacio[9] != " ":
-        return True
-    elif (tablero_vacio[1] == tablero_vacio[28] == tablero_vacio[55]) and tablero_vacio[1] != " ":
-        return True
-    elif (tablero_vacio[9] == tablero_vacio[28] == tablero_vacio[47]) and tablero_vacio[9] != " ":
-        return True
+def ganar(tablero_vacio):
+    combinaciones_ganadoras = [[1, 5, 9], [24, 28, 32], [47, 51, 55], [1, 24, 47], [5, 28, 51], [9, 32, 55], [1, 28, 55], [9, 28, 47]]
+    for combinacion in combinaciones_ganadoras:
+        if tablero_vacio[combinacion[0]] == tablero_vacio[combinacion[1]] == tablero_vacio[combinacion[2]] != " ":
+            return True
+    return False
+
         
 
-def eleccion_maquina():
-    pass
+# def eleccion_maquina(jugadas_permitidas, tablero_vacio):
+#     posiciones_ganadoras = [
+#         (1, 5, 9), (24, 28, 32), (47, 51, 55), # Filas
+#         (1, 24, 47), (5, 28, 51), (9, 32, 55), # Columnas
+#         (1, 28, 55), (9, 28, 47)               # Diagonales
+#     ]
+
+#     # Prioridad 1: Verificar si la máquina puede ganar en la siguiente jugada
+#     for pos in posiciones_ganadoras:
+#         if tablero_vacio[pos[0]] == tablero_vacio[pos[1]] == "o" and tablero_vacio[pos[2]] == " ":
+#             pass
+#         if tablero_vacio[pos[0]] == tablero_vacio[pos[2]] == "o" and tablero_vacio[pos[1]] == " ":
+#             pass
+#         if tablero_vacio[pos[1]] == tablero_vacio[pos[2]] == "o" and tablero_vacio[pos[0]] == " ":
+#             pass
+
+#     # Prioridad 2: Verificar si el jugador puede ganar en la siguiente jugada y bloquearlo
+#     for pos in posiciones_ganadoras:
+#         if tablero_vacio[pos[0]] == tablero_vacio[pos[1]] == "x" and tablero_vacio[pos[2]] == " ":
+#             pass
+#         if tablero_vacio[pos[0]] == tablero_vacio[pos[2]] == "x" and tablero_vacio[pos[1]] == " ":
+#             pass
+#         if tablero_vacio[pos[1]] == tablero_vacio[pos[2]] == "x" and tablero_vacio[pos[0]] == " ":
+#             pass
+
+#     # Prioridad 3: Hacer una jugada aleatoria en una casilla libre
+#     return random.choice(jugadas_permitidas)
+
+# # Reemplazar la llamada a random.choice por la función eleccion_maquina
 
 
-if quien_juega == "S":
-    jugadores = ["J", "M"]
-    quien_juega = random.choice(jugadores)
+
+
+while True:
+    quien_juega = input("Elección: ").upper()
+    if quien_juega == "S":
+        jugadores = ["J", "M"]
+        quien_juega = random.choice(jugadores)
+        break
+    elif quien_juega in "JM":
+        os.system('clear')
+        break
+    else:
+        print("Opción no válida 👎 inténtalo de nuevo.")
+
+
 
 while True:
     if quien_juega == "x":
@@ -83,6 +110,7 @@ while True:
        
         while True:
             jugada_jugador = int(input("\n\nCasilla: "))
+            os.system('clear')
             
             if jugada_jugador in jugadas_permitidas:
                 jugadas_permitidas.remove(jugada_jugador)
@@ -95,7 +123,7 @@ while True:
                 print(tablero_vacio)
         
         rellena_casilla(jugada_jugador, quien_juega)
-        if ganar() == True:
+        if ganar(tablero_vacio) == True:
             print(f"\n\n!Enhorabuena! Has ganado 🥳\n\n")
             break
         elif len(jugadas_permitidas) == 0:
@@ -107,7 +135,7 @@ while True:
         jugada_maquina = int(random.choice(jugadas_permitidas))
         jugadas_permitidas.remove(jugada_maquina)
         rellena_casilla(jugada_maquina, quien_juega)
-        if ganar() == True:
+        if ganar(tablero_vacio) == True:
             print("\n\nLa máquina ha ganado 🤖 Inténtalo de nuevo!\n\n")
             break
         elif len(jugadas_permitidas) == 0:
@@ -115,9 +143,3 @@ while True:
             break
         print("\nLa máquina es la 'o' e hizo su jugada, ahora es tu turno.")
     
-    else:
-        print("Opción no válida 👎 inténtalo de nuevo.")
-        break
-
-
-# Falta implementar la función que deje la máquina mas competitiva: In progress.

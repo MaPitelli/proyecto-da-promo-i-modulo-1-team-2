@@ -7,12 +7,13 @@ from tarea3 import tarea3 as t3
 from tarea4 import tarea4 as t4
 from tarea5 import tarea5 as t5
 
-os.system("clear")
-print("*** PREGUNTAS DEL EXAMEN PARA LA NACIONALIDAD ESPAÑOLA ***")
+os.system('clear')
+print("\n\n\t\t\t\t*** TRIVIA ESPAÑA ***")
+print("----" *30,"\n")
+print("Reglas del juego: Si tiene 3 aciertos ganas y si tienes 3 fallos pierdes.\n\n")
 print("----" *30,"\n")
 
-numero_total_intentos = 7
-# Si tiene 4 aciertos ganas y si tienes 4 fallos pierdes.
+numero_total_intentos = 0 
 aciertos = 0
 errores = 0
 
@@ -76,9 +77,9 @@ while True:
     else:
         print("Opción no válida, intenta otra vez.")
 
-    if aciertos == 4:
+    if aciertos == 3:
         print("¡Enhorabuena! Ganaste el juego.")
         break
-    elif errores == 4:
+    elif errores == 3:
         print("Ooohhhh qué pena, perdiste. ¡No te rindas! Inténtalo de nuevo!")
         break
