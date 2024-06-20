@@ -9,8 +9,7 @@ class PiedraPapelTijera:
     def __init__(self) -> None:
         self.mostrar_reglas()
         
-        pass
-
+        
     def mostrar_reglas(self):
 
         os.system("clear")
@@ -78,13 +77,20 @@ class PiedraPapelTijera:
                 
                 partidas_ganadas_jugador = partidas_ganadas_jugador +1 # Incrementa el contador de partidas ganadas del jugador
 
-                print("el 🙋‍♀️ ha sacado",jugador, " y la 🤖", maquina,"ha ganado el 🙋‍♀️\n")       
-
+                print("el 🙋‍♀️ ha sacado", jugador, " y la 🤖", maquina," ha ganado el 🙋‍♀️\n")       
+                
+                
             #Las opciones donde la máquina gana:
-            elif (maquina == "✊" and jugador == "✊") or (maquina == "🖐️" and jugador == "🖐️") or (maquina == "✌️" and jugador == "✌️"):
-
-                print("el 🙋‍♀️ ha sacado",jugador, " y la 🤖", maquina,"🤝\n")
- 
+            elif (maquina == "✊" and jugador == "✌️") or (maquina == "🖐️" and jugador == "✊") or (maquina == "✌️" and jugador == "🖐️"):            
+            
+                partidas_ganadas_maquina += 1  # Incrementa el contador de partidas ganadas de la máquina
+                print(f"El 🙋‍♀️ ha sacado {jugador} y la 🤖 {maquina}. Ha ganado la 🤖")
+                      
+            else:
+                
+                print(f"El 🙋‍♀️ ha sacado {jugador} y la 🤖 {maquina}. Empate 🤝") # Las opciones donde la máquina y el jugador empatan
+            
+            print("total ganadas 🙋‍♀️ = ", partidas_ganadas_jugador, " total ganadas 🤖 =", partidas_ganadas_maquina,"\n")
  # Muestra quién ha ganado la serie de 3 partidas
 
         if partidas_ganadas_maquina > partidas_ganadas_jugador:
@@ -94,7 +100,7 @@ class PiedraPapelTijera:
                 
             print("Ha ganado el 🙋‍♀️\n")
 
-# Iniciamos la partidas
+# Iniciamos la partida
 mi_partida = PiedraPapelTijera()
 
 # variable para controlar si se debe volver a jugar
