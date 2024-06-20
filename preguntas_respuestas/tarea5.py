@@ -55,12 +55,9 @@ tarea5 = {
         "b"
     ],
     "¿Cuál es la tasa máxima de alcohol en sangre permitida a los conductores, en gramos por litro (g/l)? ": [
-        "a) 0",
-        "5",
-        "b) 0",
-        "",
-        " c) 0",
-        "9",
+        "a) 0,5",
+        "b) 0,7",
+        "c) 0,9",
         "a"
     ],
     "Las viviendas de protección oficial… ": [

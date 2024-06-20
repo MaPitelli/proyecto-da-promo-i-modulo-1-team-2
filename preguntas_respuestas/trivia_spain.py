@@ -13,7 +13,7 @@ print("----" *30,"\n")
 print("Reglas del juego: Si tiene 3 aciertos ganas y si tienes 3 fallos pierdes.\n\n")
 print("----" *30,"\n")
 
-numero_total_intentos = 3 
+numero_total_intentos = 0
 aciertos = 0
 errores = 0
 
