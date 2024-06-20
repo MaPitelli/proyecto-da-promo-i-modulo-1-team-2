@@ -81,7 +81,7 @@ class PiedraPapelTijera:
                 print("el 🙋‍♀️ ha sacado",jugador, " y la 🤖", maquina,"ha ganado el 🙋‍♀️\n")       
 
             #Las opciones donde la máquina gana:
-            if (maquina == "✊" and jugador == "✊") or (maquina == "🖐️" and jugador == "🖐️") or (maquina == "✌️" and jugador == "✌️"):
+            elif (maquina == "✊" and jugador == "✊") or (maquina == "🖐️" and jugador == "🖐️") or (maquina == "✌️" and jugador == "✌️"):
 
                 print("el 🙋‍♀️ ha sacado",jugador, " y la 🤖", maquina,"🤝\n")
  
