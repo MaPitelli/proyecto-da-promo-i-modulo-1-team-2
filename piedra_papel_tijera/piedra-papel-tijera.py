@@ -13,24 +13,25 @@ class PiedraPapelTijera:
     def mostrar_reglas(self):
 
         os.system("clear")
-        print(" Piedra ✊ Papel 🖐️  & Tijera ✌️\n")
+        print("----" *28,"\n\n\n")
+        print(" \t\t\t\tPiedra ✊ Papel 🖐️  & Tijera ✌️\n\n")
+        print("----" *28,"\n\n")
+        print("\t- Reglas del Juego Piedra, Papel y Tijera:\n")
 
-        print("- Reglas del Juego Piedra, Papel y Tijera:\n")
+        print("\t    - Dos jugadores eligen una de las tres opciones: Piedra, Papel o Tijera.\n")
 
-        print("     - Dos jugadores eligen una de las tres opciones: Piedra, Papel o Tijera.\n")
-
-        print("- Las reglas para determinar al ganador son:\n")
+        print("\t- Las reglas para determinar al ganador son:\n")
                 
-        print("     - Piedra vence a Tijera.\n")
+        print("\t     - Piedra vence a Tijera.\n")
 
-        print("     - Tijera vence a Papel.\n")
+        print("\t     - Tijera vence a Papel.\n")
 
-        print("     - Papel vence a Piedra.\n")
+        print("\t     - Papel vence a Piedra.\n")
 
-        print("     - El jugador que gana una ronda obtiene un punto.\n")
+        print("\t- El jugador que gana una ronda obtiene un punto.\n")
                 
-        print("     - El juego continúa hasta que un jugador haya acumulado 3 puntos, convirtiéndose en el ganador.\n")
-
+        print("\t- El juego continúa hasta que un jugador haya acumulado 3 puntos, convirtiéndose en el ganador.\n")
+        print("----" *28,"\n\n\n")  
     def jugar_partida(self):
 
         # Inicializa los contadores de partidas ganadas para el jugador y la máquina
