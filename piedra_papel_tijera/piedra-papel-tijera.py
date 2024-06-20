@@ -78,7 +78,7 @@ class PiedraPapelTijera:
                 
                 partidas_ganadas_jugador = partidas_ganadas_jugador +1 # Incrementa el contador de partidas ganadas del jugador
 
-                print("el 🙋‍♀️ ha sacado", jugador, " y la 🤖", maquina," ha ganado el 🙋‍♀️\n")       
+                print("el 🙋‍♀️ ha sacado", jugador, " y la 🤖", maquina," ha ganado el 🙋‍♀️")       
                 
                 
             #Las opciones donde la máquina gana:

@@ -14,30 +14,30 @@ class Trivia:
         self.aciertos = 0
         self.errores = 0
         self.respuesta_correcta = None
-        self.temas_elegidos = []
+        self.temas = ["1 - GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA",
+                 "2 - DERECHOS Y DEBERES FUNDAMENTALES",
+                 "3 - ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA", 
+                 "4 - CULTURA E HISTORIA DE ESPAÑA", 
+                 "5 - SOCIEDAD ESPAÑOLA", 
+                 "S - No quiero elegir, que se haga un sorteo"]
+        # self.temas_elegidos = []
 
     def mensaje_bienvenida(self):
         os.system('clear') 
         print("\n\n","\t"*6,"    *** TRIVIAL ESPAÑA ***")
         print("\t"*3,"----" *20,"\n")
-        print("\t"*2,"     Reglas del juego: Si tienes 1 acierto en cada tema ganas. Puedes tener hasta 3 fallos.\n")
+        print("\t"*2,"     Reglas del juego: Si tienes 3 aciertos ganas. Si tienes 3 fallos pierdes.\n")
         print("\t"*3,"----" *20,"\n")
         
         
-    def mostrar_tareas(self):    
-        temas = ["1 - GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA",
-                 "2 - DERECHOS Y DEBERES FUNDAMENTALES",
-                 "3 - ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA", 
-                 "4 - CULTURA E HISTORIA DE ESPAÑA", 
-                 "5 - SOCIEDAD ESPAÑOLA"]
-        
+    def mostrar_tareas(self):        
         # if self.temas_elegidos:
         #     for i in self.temas_elegidos:
         #         temas.remove(i)
 
         self.preguntas_respuestas = None
         print("\t\t\t  Elige un tema:\n")
-        for i in temas:
+        for i in self.temas:
             print("\t"*4,i)
                             
  
@@ -45,25 +45,31 @@ class Trivia:
         while self.preguntas_respuestas == None:
             tarea = input("\n\n\t\t\t  INGRESA TU OPCIÓN o 'q' para salir: ").lower()
             os.system('clear')
-            if tarea == "1":
+            if tarea == "s":
+                tareas = [t1, t2, t3, t4, t5]
+                tarea_elegida = random.choice(tareas)
+                self.preguntas_respuestas = tarea_elegida
+                indice_tarea = tareas.index(tarea_elegida)
+                print(f"\nTema elegido: {self.temas[indice_tarea]}\n")
+            elif tarea == "1":
                 self.preguntas_respuestas = t1
-                self.temas_elegidos.append("1 - GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA")
+                # self.temas_elegidos.append("1 - GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA")
                 print(f"\nTema elegido: GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA\n")
             elif tarea == "2":
                 self.preguntas_respuestas = t2
-                self.temas_elegidos.append("2 - DERECHOS Y DEBERES FUNDAMENTALES")
+                # self.temas_elegidos.append("2 - DERECHOS Y DEBERES FUNDAMENTALES")
                 print(f"\nTema elegido: DERECHOS Y DEBERES FUNDAMENTALES\n")
             elif tarea == "3":
                 self.preguntas_respuestas = t3
-                self.temas_elegidos.append("3 - ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA")
+                # self.temas_elegidos.append("3 - ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA")
                 print(f"\nTema elegido: ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA\n")
             elif tarea == "4":
                 self.preguntas_respuestas = t4
-                self.temas_elegidos.append("4 - CULTURA E HISTORIA DE ESPAÑA")
+                # self.temas_elegidos.append("4 - CULTURA E HISTORIA DE ESPAÑA")
                 print(f"\nTema elegido: CULTURA E HISTORIA DE ESPAÑA\n")
             elif tarea == "5":
                 self.preguntas_respuestas = t5
-                self.temas_elegidos.append("5 - SOCIEDAD ESPAÑOLA")
+                # self.temas_elegidos.append("5 - SOCIEDAD ESPAÑOLA")
                 print(f"\nTema elegido: SOCIEDAD ESPAÑOLA\n")
             elif tarea == "q":
                 self.__despedir_juego()
@@ -114,7 +120,7 @@ class Trivia:
 
 
     def ganar_perder(self):
-        if self.aciertos == 5:
+        if self.aciertos == 3:
             print("¡Enhorabuena! Ganaste el juego.\n\n") 
         elif self.errores == 3:
             print("Ooohhhh qué pena, perdiste. ¡No te rindas! Inténtalo de nuevo!\n\n")
@@ -125,18 +131,52 @@ class Trivia:
                 
 
     def cambiar_tema(self):
-        print("\nIngresa 't' si deseas cambiar de tema: ")
+        print('''Deseas seguir en el mismo tema o prefieres cambiar de tema?\n
+                                                's' - seguir
+                                                'c' - cambiar''')
+        while True:
+            opcion = input("\n\t\t\t\t\topción: ").lower()
+            os.system('clear')
+            if opcion in 'sc':
+                break
+            else:
+                print("\nOpción no válida, intenta otra vez.\n\n")
+                
+        return opcion
 
 
-# Ejecución principal
+
+# # Ejecución principal
+# if __name__ == "__main__":
+#     juego = Trivia()
+#     juego.mensaje_bienvenida()
+#     while juego.aciertos < 3 and juego.errores < 3:
+#         # Solo pide cambiar de tema después de cada ronda completa
+#         if not juego.preguntas_respuestas or juego.cambiar_tema() == 'c':
+#             juego.mostrar_tareas()
+#             juego.elige_tarea()
+        
+#         juego.imprime_pregunta_respuestas()
+#         juego.verifica_respuesta_jugador()
+#         juego.ganar_perder()
+
+#         if juego.aciertos >= 3 or juego.errores >= 3:
+#             break
+
+
 if __name__ == "__main__":
     juego = Trivia()
     juego.mensaje_bienvenida()
-    while juego.aciertos < 5 and juego.errores < 3:
-        juego.mostrar_tareas()
-        juego.elige_tarea()
-        if juego.aciertos >= 5:
+    while juego.aciertos < 3 and juego.errores < 3:
+        # Solo pide cambiar de tema después de cada ronda completa
+        if not juego.preguntas_respuestas or juego.cambiar_tema() == 'c':
+            juego.mostrar_tareas()
+            juego.elige_tarea()
+        
+        if juego.preguntas_respuestas:  # Verifica que preguntas_respuestas no sea None
+            juego.imprime_pregunta_respuestas()
+            juego.verifica_respuesta_jugador()
+            juego.ganar_perder()
+
+        if juego.aciertos >= 3 or juego.errores >= 3:
             break
-        juego.imprime_pregunta_respuestas()
-        juego.verifica_respuesta_jugador()
-        juego.ganar_perder()
