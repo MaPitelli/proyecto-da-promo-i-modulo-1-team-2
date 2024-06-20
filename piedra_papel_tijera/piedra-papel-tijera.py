@@ -94,7 +94,7 @@ class PiedraPapelTijera:
                 
             print("Ha ganado el 🙋‍♀️\n")
 
-# Iniciamos la partida
+# Iniciamos la partidas
 mi_partida = PiedraPapelTijera()
 
 # variable para controlar si se debe volver a jugar
