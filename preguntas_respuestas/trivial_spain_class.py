@@ -14,44 +14,61 @@ class Trivia:
         self.aciertos = 0
         self.errores = 0
         self.respuesta_correcta = None
+        self.temas_elegidos = []
 
     def mensaje_bienvenida(self):
         os.system('clear') 
-        print("\n\n\t\t\t\t*** TRIVIA ESPAÑA ***")
-        print("----" *20,"\n")
-        print("Reglas del juego: Si tiene 3 aciertos ganas y si tienes 3 fallos pierdes.\n\n")
-        print("----" *20,"\n")
-        print('''Elige un tema:
+        print("\n\n","\t"*6,"    *** TRIVIAL ESPAÑA ***")
+        print("\t"*3,"----" *20,"\n")
+        print("\t"*2,"     Reglas del juego: Si tienes 1 acierto en cada tema ganas. Puedes tener hasta 3 fallos.\n")
+        print("\t"*3,"----" *20,"\n")
+        
+        
+    def mostrar_tareas(self):    
+        temas = ["1 - GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA",
+                 "2 - DERECHOS Y DEBERES FUNDAMENTALES",
+                 "3 - ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA", 
+                 "4 - CULTURA E HISTORIA DE ESPAÑA", 
+                 "5 - SOCIEDAD ESPAÑOLA"]
+        
+        # if self.temas_elegidos:
+        #     for i in self.temas_elegidos:
+        #         temas.remove(i)
+
+        self.preguntas_respuestas = None
+        print("\t\t\t  Elige un tema:\n")
+        for i in temas:
+            print("\t"*4,i)
                             
-                            1 - GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA
-                            2 - DERECHOS Y DEBERES FUNDAMENTALES
-                            3 - ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA
-                            4 - CULTURA E HISTORIA DE ESPAÑA
-                            5 - SOCIEDAD ESPAÑOLA''')
-
-
+ 
     def elige_tarea(self):
         while self.preguntas_respuestas == None:
-            tarea = input("\n\nINGRESA TU OPCIÓN DEL 1 AL 5 o 'q' para salir: ").lower()
+            tarea = input("\n\n\t\t\t  INGRESA TU OPCIÓN o 'q' para salir: ").lower()
             os.system('clear')
             if tarea == "1":
                 self.preguntas_respuestas = t1
+                self.temas_elegidos.append("1 - GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA")
                 print(f"\nTema elegido: GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA\n")
             elif tarea == "2":
                 self.preguntas_respuestas = t2
+                self.temas_elegidos.append("2 - DERECHOS Y DEBERES FUNDAMENTALES")
                 print(f"\nTema elegido: DERECHOS Y DEBERES FUNDAMENTALES\n")
             elif tarea == "3":
                 self.preguntas_respuestas = t3
+                self.temas_elegidos.append("3 - ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA")
                 print(f"\nTema elegido: ORGANIZACIÓN TERRITORIAL DE ESPAÑA - GEOGRAFÍA FÍSICA Y POLÍTICA\n")
             elif tarea == "4":
                 self.preguntas_respuestas = t4
+                self.temas_elegidos.append("4 - CULTURA E HISTORIA DE ESPAÑA")
                 print(f"\nTema elegido: CULTURA E HISTORIA DE ESPAÑA\n")
             elif tarea == "5":
                 self.preguntas_respuestas = t5
+                self.temas_elegidos.append("5 - SOCIEDAD ESPAÑOLA")
                 print(f"\nTema elegido: SOCIEDAD ESPAÑOLA\n")
             elif tarea == "q":
                 self.__despedir_juego()
-                break 
+                self.aciertos = 10
+                break
             else:
                 print("\nOpción no valida, vuelve a intentarlo.")
         
@@ -97,15 +114,14 @@ class Trivia:
 
 
     def ganar_perder(self):
-        if self.aciertos == 3:
+        if self.aciertos == 5:
             print("¡Enhorabuena! Ganaste el juego.\n\n") 
         elif self.errores == 3:
             print("Ooohhhh qué pena, perdiste. ¡No te rindas! Inténtalo de nuevo!\n\n")
 
 
     def __despedir_juego(self):
-        self.aciertos = self.errores = 4
-        print("\nEsperamos verte de nuevo por aquí pronto 😊 ¡Hasta luego! 👋\n\n")
+        print("\n"*5,"\t"*3,"Esperamos verte de nuevo por aquí pronto 😊 ¡Hasta luego! 👋\n\n\n")
                 
 
     def cambiar_tema(self):
@@ -116,8 +132,11 @@ class Trivia:
 if __name__ == "__main__":
     juego = Trivia()
     juego.mensaje_bienvenida()
-    juego.elige_tarea()
-    while juego.aciertos < 3 and juego.errores < 3:
+    while juego.aciertos < 5 and juego.errores < 3:
+        juego.mostrar_tareas()
+        juego.elige_tarea()
+        if juego.aciertos >= 5:
+            break
         juego.imprime_pregunta_respuestas()
         juego.verifica_respuesta_jugador()
         juego.ganar_perder()
