@@ -118,8 +118,8 @@ class TicTacToe:
                     try:
                         jugada_jugador = int(input("\n\n\t\t\tCasilla: "))
                     except ValueError:
-                        pass
-                    
+                        jugada_jugador = 0
+                                            
                     os.system('clear')
 
                     if jugada_jugador in self.jugadas_permitidas:
