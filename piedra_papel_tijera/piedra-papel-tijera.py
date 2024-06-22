@@ -13,14 +13,10 @@ class PiedraPapelTijera:
     def mostrar_reglas(self):
 
         os.system("clear")
-<<<<<<< HEAD
-        print(" Piedra ✊ Papel 🖐️  & Tijera \u270C️\n")
-=======
         print("----" *28,"\n\n\n")
         print(" \t\t\t\tPiedra ✊ Papel 🖐️  & Tijera ✌️\n\n")
         print("----" *28,"\n\n")
         print("\t- Reglas del Juego Piedra, Papel y Tijera:\n")
->>>>>>> 64d54d42a86a93c1547f51789c053fb87a41338c
 
         print("\t    - Dos jugadores eligen una de las tres opciones: Piedra, Papel o Tijera.\n")
 
