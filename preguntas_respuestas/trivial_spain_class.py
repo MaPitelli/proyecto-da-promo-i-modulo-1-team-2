@@ -7,7 +7,7 @@ from tarea3 import tarea3 as t3
 from tarea4 import tarea4 as t4
 from tarea5 import tarea5 as t5
 
-class Trivia:
+class Trivial:
 
     def __init__(self):
         self.preguntas_respuestas = None
@@ -31,12 +31,8 @@ class Trivia:
         
         
     def mostrar_tareas(self):        
-        # if self.temas_elegidos:
-        #     for i in self.temas_elegidos:
-        #         temas.remove(i)
-
         self.preguntas_respuestas = None
-        print("\t\t\t  Elige un tema:\n")
+        print("\n\t\t\t  Elige un tema:\n")
         for i in self.temas:
             print("\t"*4,i)
                             
@@ -49,8 +45,8 @@ class Trivia:
                 tareas = [t1, t2, t3, t4, t5]
                 tarea_elegida = random.choice(tareas)
                 self.preguntas_respuestas = tarea_elegida
-                indice_tarea = tareas.index(tarea_elegida)
-                print(f"\nTema elegido: {self.temas[indice_tarea]}\n")
+                # indice_tarea = tareas.index(tarea_elegida)
+                # print(f"\nTema elegido: {self.temas[indice_tarea]}\n")
             elif tarea == "1":
                 self.preguntas_respuestas = t1
                 # self.temas_elegidos.append("1 - GOBIERNO, LEGISLACIÓN Y PARTICIPACIÓN CIUDADANA")
@@ -76,10 +72,14 @@ class Trivia:
                 self.aciertos = 10
                 break
             else:
-                print("\nOpción no valida, vuelve a intentarlo.")
+                print("\n\n\t\t\t\tOpción no valida, vuelve a intentarlo.\n\n")
+                self.mostrar_tareas()
         
 
     def imprime_pregunta_respuestas(self):
+        tareas = [t1, t2, t3, t4, t5]
+        indice_tarea = tareas.index(self.preguntas_respuestas)
+        print(f"\nTema elegido: {self.temas[indice_tarea]}\n")
         print("----" *20)
         pregunta = (random.choice(list(self.preguntas_respuestas.keys())))
         print("\n\n",pregunta)
@@ -98,7 +98,7 @@ class Trivia:
     def verifica_respuesta_jugador(self):
         while True:    
             while True:
-                respuesta_jugador = input("Cuál es la respuesta correcta? ").lower()
+                respuesta_jugador = input("\n\nCuál es la respuesta correcta? ").lower()
                 if self.preguntas_respuestas == t2:
                     if respuesta_jugador in "ab":
                         break
@@ -145,27 +145,8 @@ class Trivia:
         return opcion
 
 
-
-# # Ejecución principal
-# if __name__ == "__main__":
-#     juego = Trivia()
-#     juego.mensaje_bienvenida()
-#     while juego.aciertos < 3 and juego.errores < 3:
-#         # Solo pide cambiar de tema después de cada ronda completa
-#         if not juego.preguntas_respuestas or juego.cambiar_tema() == 'c':
-#             juego.mostrar_tareas()
-#             juego.elige_tarea()
-        
-#         juego.imprime_pregunta_respuestas()
-#         juego.verifica_respuesta_jugador()
-#         juego.ganar_perder()
-
-#         if juego.aciertos >= 3 or juego.errores >= 3:
-#             break
-
-
 if __name__ == "__main__":
-    juego = Trivia()
+    juego = Trivial()
     juego.mensaje_bienvenida()
     while juego.aciertos < 3 and juego.errores < 3:
         # Solo pide cambiar de tema después de cada ronda completa
